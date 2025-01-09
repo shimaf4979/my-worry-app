@@ -93,8 +93,8 @@ const getLeastFrequentItems = (counts: Record<string, number>): string[] => {
 export const selectRandomQuestions = (
   mainCategory: MainCategory,
   questionBank: QuestionBank,
-  totalQuestions: number = 20,
-  minAppearances: number = 4
+  totalQuestions: number = 15,
+  minAppearances: number = 3
 ): Question[] => {
   let selectedQuestions: Question[] = [];
   let attempts = 0;

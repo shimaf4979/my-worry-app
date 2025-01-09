@@ -25,7 +25,7 @@ export default function WorrySurvey() {
   // カテゴリー選択時の処理
   const handleCategorySelect = (category: MainCategory) => {
     setSelectedCategory(category);
-    const selectedQuestions = selectRandomQuestions(category, questions, 20);
+    const selectedQuestions = selectRandomQuestions(category, questions, 15);
     setCurrentQuestions(selectedQuestions);
     setCurrentQuestionIndex(0);
   };
