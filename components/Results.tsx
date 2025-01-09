@@ -1,4 +1,10 @@
 // components/Results.tsx
+import Link from "next/link";
+import dynamic from "next/dynamic";
+
+const ModelViewer = dynamic(() => import("./Modelviewer"), {
+  ssr: false,
+});
 
 import { WorryResult, CATEGORY_LABELS } from "../types";
 
@@ -9,6 +15,7 @@ type ResultsProps = {
 
 export const Results: React.FC<ResultsProps> = ({ results, onRestart }) => {
   const topResult = results[0];
+  const modelUrl = "/models/mokuyoku1.gltf";
 
   return (
     <div className='space-y-8'>
@@ -68,6 +75,8 @@ export const Results: React.FC<ResultsProps> = ({ results, onRestart }) => {
           </p>
         </div>
       </div>
+      <h1 className='text-3xl font-bold my-4'>3Dモデルビューア</h1>
+      <ModelViewer modelPath={modelUrl} />
 
       {/* Restart Button */}
       <div className='text-center pt-4'>
@@ -79,6 +88,27 @@ export const Results: React.FC<ResultsProps> = ({ results, onRestart }) => {
           もう一度診断する
         </button>
       </div>
+      <div className='text-center pt-4'>
+        <Link
+          href='/3dmodel'
+          className='px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600
+                   transition-colors duration-200 font-medium'
+        >
+          3Dモデルを見る
+        </Link>
+      </div>
     </div>
   );
 };
+
+// export default function ModelViewerPage() {
+//   return (
+//     <div className='container mx-auto px-4'>
+//       <div className='mt-4'>
+//         <Link href='/' className='text-blue-500 hover:underline'>
+//           ホームに戻る
+//         </Link>
+//       </div>
+//     </div>
+//   );
+// }
