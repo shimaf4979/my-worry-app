@@ -1,6 +1,7 @@
 // components/Results.tsx
 import Link from "next/link";
 import dynamic from "next/dynamic";
+import { useState } from "react";
 
 const ModelViewer = dynamic(() => import("./Modelviewer"), {
   ssr: false,
@@ -15,7 +16,12 @@ type ResultsProps = {
 
 export const Results: React.FC<ResultsProps> = ({ results, onRestart }) => {
   const topResult = results[0];
-  const modelUrl = "/models/mokuyoku1.gltf";
+  const modelUrl = "/models/mokuyoku2draco.gltf";
+  const [isLoading, setIsLoading] = useState(true);
+
+  const handleModelLoad = () => {
+    setIsLoading(false);
+  };
 
   return (
     <div className='space-y-8'>
@@ -35,6 +41,11 @@ export const Results: React.FC<ResultsProps> = ({ results, onRestart }) => {
           </p>
         </div>
       </div>
+      <h1 className='text-3xl text-center font-bold my-4'>
+        そんなあなたにおすすめの沐浴施設
+      </h1>
+      {isLoading && <p className='text-center'>ロード中...</p>}
+      <ModelViewer modelPath={modelUrl} onLoad={handleModelLoad} />
 
       {/* All Results */}
       <div className='space-y-4'>
@@ -70,13 +81,11 @@ export const Results: React.FC<ResultsProps> = ({ results, onRestart }) => {
             {topResult.label}」に関する悩みが最も強く表れています。
           </p>
           <p>
-            全20問の質問を通じて、各項目が最低7回以上評価されており、
+            全15問の質問を通じて、各項目が最低2回以上評価されており、
             信頼性の高い結果となっています。
           </p>
         </div>
       </div>
-      <h1 className='text-3xl font-bold my-4'>3Dモデルビューア</h1>
-      <ModelViewer modelPath={modelUrl} />
 
       {/* Restart Button */}
       <div className='text-center pt-4'>
@@ -88,15 +97,15 @@ export const Results: React.FC<ResultsProps> = ({ results, onRestart }) => {
           もう一度診断する
         </button>
       </div>
-      <div className='text-center pt-4'>
+      {/* <div className='text-center pt-4'>
         <Link
-          href='/3dmodel'
+          href='/3dmodel2'
           className='px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600
                    transition-colors duration-200 font-medium'
         >
           3Dモデルを見る
         </Link>
-      </div>
+      </div> */}
     </div>
   );
 };

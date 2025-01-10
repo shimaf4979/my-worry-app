@@ -11,7 +11,7 @@ export default function ModelViewerPage() {
   return (
     <div className='container mx-auto px-4'>
       <h1 className='text-3xl font-bold my-4'>3Dモデルビューア</h1>
-      <ModelViewer modelPath={modelUrl} />
+      <ModelViewer modelPath={modelUrl} onLoad={() => {}} />
       <div className='mt-4'>
         <Link href='/' className='text-blue-500 hover:underline'>
           ホームに戻る

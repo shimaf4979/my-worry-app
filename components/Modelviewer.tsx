@@ -97,8 +97,19 @@ function Scene({
   );
 }
 
-export default function ModelViewer({ modelPath }: { modelPath: string }) {
+export default function ModelViewer({
+  modelPath,
+  onLoad,
+}: {
+  modelPath: string;
+  onLoad: () => void;
+}) {
   const [isRotating, setIsRotating] = useState(true);
+
+  useEffect(() => {
+    // モデルが読み込まれた後に onLoad を呼び出す
+    onLoad();
+  }, [onLoad]);
 
   return (
     <div className='w-full h-[80vh] relative'>
